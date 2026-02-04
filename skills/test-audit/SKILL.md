@@ -16,7 +16,8 @@ Audit tests for correctness, quality, and adherence to best practices.
 
 > Would you like me to audit:
 > 1. **A specific file** — Provide the path to the test file
-> 2. **The entire project** — I'll scan for all test files in the codebase
+> 2. **Only changed files** — I'll audit tests in the diff against `main` (new or modified tests)
+> 3. **The entire project** — I'll scan for all test files in the codebase
 >
 > Which would you prefer?
 
@@ -30,10 +31,27 @@ Identify:
 - **Code under test** — locate and review if available
 - **Project conventions** — infer from existing tests, config, or docs
 
-For project-wide audits, locate test files:
-```bash
-find . -type f \( -name "*_test.*" -o -name "*.test.*" -o -name "*_spec.*" -o -name "*.spec.*" -o -name "test_*.*" \) | head -50
-```
+Use the project's conventions and tooling to locate test files:
+
+| Framework | Test Location | Config | Naming Pattern |
+|-----------|---------------|--------|----------------|
+| **Jest** | `__tests__/`, `*.test.js` | `jest.config.js` | `*.test.js`, `*.spec.js` |
+| **Vitest** | `__tests__/`, `*.test.ts` | `vitest.config.ts` | `*.test.ts`, `*.spec.ts` |
+| **Mocha** | `test/` | `.mocharc.js`, `mocha.opts` | `*.test.js`, `*.spec.js` |
+| **Go** | Same as source | `go.mod` | `*_test.go` |
+| **Rust** | `src/`, `tests/` | `Cargo.toml` | `mod tests`, `tests/*.rs` |
+| **JUnit/Java** | `src/test/java/` | `pom.xml`, `build.gradle` | `*Test.java`, `*Tests.java` |
+| **C# (xUnit/NUnit)** | `*.Tests/` project | `*.csproj` | `*Tests.cs`, `*Test.cs` |
+| **PHP (PHPUnit)** | `tests/` | `phpunit.xml` | `*Test.php` |
+| **Laravel** | `tests/Unit/`, `tests/Feature/` | `phpunit.xml` | `*Test.php` |
+| **Symfony** | `tests/` | `phpunit.xml.dist` | `*Test.php` |
+| **Ruby (RSpec)** | `spec/` | `.rspec`, `spec_helper.rb` | `*_spec.rb` |
+| **Rails** | `spec/` or `test/` | `.rspec`, `rails_helper.rb` | `*_spec.rb`, `*_test.rb` |
+| **Django** | `tests/`, `*/tests.py` | `pytest.ini`, `setup.cfg` | `test_*.py`, `*_test.py` |
+
+Also check for:
+- Package manager scripts (`composer test`, `bundle exec rspec`, `python manage.py test`)
+- CI configuration files for test commands
 
 ## Step 3: Apply Audit Criteria
 
