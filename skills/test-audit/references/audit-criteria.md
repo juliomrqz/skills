@@ -104,11 +104,25 @@ Apply idiomatic practices:
 
 | Framework | Best Practices |
 |-----------|----------------|
-| **Jest** | Clear mocks, handle async correctly, use `beforeEach` |
+| **Jest** | Clear mocks with `jest.clearAllMocks()`, handle async with `async/await`, use `beforeEach`, `describe` blocks |
+| **Vitest** | Similar to Jest; use `vi.mock()`, native ESM support, `beforeEach`/`afterEach` |
+| **Mocha/Chai** | Use `describe`/`it`, `before`/`after` hooks, `chai.expect` assertions, `sinon` for mocks |
+| **TypeScript** | Type test inputs/outputs, use `as const` for fixtures, test type narrowing |
 | **pytest** | Leverage fixtures and `@parametrize` |
 | **RSpec** | Use `let`/`let!`, `subject`, shared examples |
-| **JUnit** | Pair `@BeforeEach`/`@AfterEach` properly |
+| **JUnit 5** | `@BeforeEach`/`@AfterEach`, `@ParameterizedTest`, `@Nested` for grouping, `assertAll()` |
+| **TestNG** | `@DataProvider`, `@BeforeMethod`/`@AfterMethod`, `dependsOnMethods` sparingly |
+| **Go** | Table-driven tests, `t.Run()` for subtests, `t.Parallel()`, `testify` for assertions, `t.Helper()` |
+| **Rust** | `#[test]`, `#[should_panic]`, `#[ignore]`, use `assert_eq!`/`assert_ne!`, `mod tests` convention |
+| **C# (xUnit)** | `[Fact]`/`[Theory]`, `[InlineData]`, constructor for setup, `IDisposable` for teardown |
+| **C# (NUnit)** | `[Test]`/`[TestCase]`, `[SetUp]`/`[TearDown]`, `Assert.That` fluent syntax |
+| **C# (MSTest)** | `[TestMethod]`, `[DataRow]`, `[TestInitialize]`/`[TestCleanup]` |
 | **PHPUnit** | Use data providers, `setUp`/`tearDown` |
+| **Laravel** | Use `RefreshDatabase`, factories, `actingAs()` for auth, `assertStatus()`, `assertJson()` |
+| **Symfony** | Use `KernelTestCase`, `WebTestCase`, service container for mocks |
+| **Ruby/RSpec** | Use `let`/`let!`, `subject`, `describe`/`context` nesting, shared examples |
+| **Rails** | Use `FactoryBot`, `DatabaseCleaner`, request specs over controller specs, `have_http_status` |
+| **Django** | Use `TestCase`, `Client`, `setUp`/`tearDown`, `@override_settings`, factory libraries |
 
 ## Common Antipatterns
 
